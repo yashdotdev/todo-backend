@@ -121,9 +121,16 @@ app.delete("/todos/:id", (req, res) => {
 
 // Root
 app.get("/", (req, res) => {
-  res.send("📝 Todo backend is running!");
+  res.send("Todo backend is running!");
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+
+// For local development only
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+
+// Vercel handler
+export default app;
