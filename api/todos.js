@@ -63,18 +63,29 @@ const todos = {
 
 // Get all todos
 app.get("/todos", (req, res) => {
+  const { id } = req.query;
+  if (id) {
+    const todo = todos[id];
+    if (todo) {
+      return res.json(todo);
+    } else {
+      return res.status(404).json({ error: "Todo not found" });
+    }
+  }
+
+  // If no id given, return all todos
   res.json(todos);
 });
 
 //  Get a specific todo
-app.get("/todos/:id", (req, res) => {
-  const todo = todos[req.params.id];
-  if (todo) {
-    res.json(todo);
-  } else {
-    res.status(404).json({ error: "Todo not found" });
-  }
-});
+// app.get("/todos/:id", (req, res) => {
+//   const todo = todos[req.params.id];
+//   if (todo) {
+//     res.json(todo);
+//   } else {
+//     res.status(404).json({ error: "Todo not found" });
+//   }
+// });
 
 //  Create a new todo
 app.post("/todos", (req, res) => {
