@@ -74,7 +74,7 @@ app.get("/todos", (req, res) => {
   }
 
   // If no id given, return all todos
-   res.json(Object.values(todos));
+  res.json(todos);
 });
 
 //  Get a specific todo
